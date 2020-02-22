@@ -9,4 +9,6 @@ That display is from Banggood.  "MAX7219 Dot Matrix Module 4-in-1 LED" -- two of
 
 Does not understand UTF-8-ÄÖÅ : "iconv -f UTF-8 -t ISO-8859-1" 
 
+I have 3 of these types. They show ALL IMPORTANT STUFF in every room, so no need to check your phone or computer all the time.
+
 <IMG src=kuva.png>
