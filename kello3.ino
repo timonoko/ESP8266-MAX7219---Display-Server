@@ -90,6 +90,7 @@ void printText(uint8_t modStart, uint8_t modEnd, String Viesti)
   mx.control(modStart, modEnd, MD_MAX72XX::UPDATE, MD_MAX72XX::ON);
 }
 
+// Short messages are static, long messages scroll.
 void printLong(String s) {
   int x;
   if (s.length()<16) {
