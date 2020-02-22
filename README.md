@@ -1,5 +1,5 @@
 # ESP8266-MD72XX---Wall-Clock
-Server-type Wifi clock, which only shows messages from my desktops. 
+Server-type Wifi clock, which only shows messages from my desktop machine. 
 
 Example: 192.168.1.24/M/"The time is $(date +'%H:%M')"
 
