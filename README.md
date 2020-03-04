@@ -11,4 +11,6 @@ Does not understand UTF-8-ÄÖÅ : "iconv -f UTF-8 -t ISO-8859-1"
 
 I have 3 of these. They show ALL IMPORTANT STUFF in every room, so no need to check your phone or computer all the time.
 
+*NEW* Added 60 seconds timer, exclaims "**POIKKI**" if wifi is not working.
+
 <IMG src=kuva.png>
