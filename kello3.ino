@@ -7,24 +7,27 @@
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 8
 
-#define CLK_PIN   2 
-#define DATA_PIN  1 
-#define CS_PIN    0 
+#define CLK_PIN   2 // or SCK
+#define DATA_PIN  1 // or MOSI
+#define CS_PIN    0 // or SS
 
-int INTENSITY = 2 ;
+int INTENSITY = 1 ;
 
 MD_MAX72XX mx = MD_MAX72XX(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
 
-char* ssid = "****"; 
-char* password = "*****";
+char* ssid = "*****"; // Your Wifi network name here
+char* password = "******";    // Your Wifi network password here
+
+unsigned long previousMillis = 0;
+const long interval = 60*1000; // 1  minsa
+
 
 WiFiServer server(80);
 
 #define CHAR_SPACING  1 // pixels between characters
-
 #define BUF_SIZE  75
 
-
+//void printText(uint8_t modStart, uint8_t modEnd, char *pMsg)
 void printText(uint8_t modStart, uint8_t modEnd, String Viesti)
 {
   uint8_t   state = 0;
@@ -90,7 +93,6 @@ void printText(uint8_t modStart, uint8_t modEnd, String Viesti)
   mx.control(modStart, modEnd, MD_MAX72XX::UPDATE, MD_MAX72XX::ON);
 }
 
-// Short messages are static, long messages scroll.
 void printLong(String s) {
   int x;
   if (s.length()<16) {
@@ -98,7 +100,7 @@ void printLong(String s) {
   else {
     for (x=0;x<(s.length()-15);x++) {
     printText(0, MAX_DEVICES-1, s.substring(x,x+24)); 
-    delay(500); }}}
+    delay(200); }}}
       
 void setup()
 {
@@ -107,12 +109,17 @@ void setup()
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000); }
   server.begin();                           // Starting the server
-  printText(0, MAX_DEVICES-1, "Hello!") ;
+  WiFi.softAPdisconnect(true);
+  printText(0, MAX_DEVICES-1, "**TOIMII**") ;
   mx.control(MD_MAX72XX::INTENSITY, INTENSITY);
 }
 
 void loop()
 {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    printText(0, MAX_DEVICES-1, "**POIKKI**"); } 
   WiFiClient client = server.available();     //Checking if any client request is available or not
   if (client)
   {
@@ -143,6 +150,7 @@ void loop()
         } 
         else 
           if (c == '\r') {     
+	    previousMillis = currentMillis;
 	    if (buffer.indexOf("GET /M/")>=0)
 	      { printLong(buffer.substring(7,buffer.length()-9)) ; };
 	    if (buffer.indexOf("GET /BP")>=0)
