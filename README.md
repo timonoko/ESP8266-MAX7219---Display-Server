@@ -1,4 +1,10 @@
 # ESP8266-01 MD_MAX72XX - Display
+
+8266 broke down after only 6 years. Made micropython-version with ESP32.
+Starts with boot.py
+
+=========
+
 Server-type Wifi clock, which only shows messages from my desktop machine. 
 
 Example: 192.168.1.24/M/"The time is $(date +'%H:%M')"
