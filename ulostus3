@@ -1,0 +1,11 @@
+#! /usr/bin/python3
+
+import sys,binascii,os
+text=" ".join(sys.argv[1:])
+print(text)
+
+tulos=""
+for c in text: tulos+=hex(ord(c))[2:]
+
+print('curl http://192.168.1.182/nayta'+tulos+'$')
+os.system('curl http://192.168.1.182/nayta'+tulos+'$')
