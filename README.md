@@ -3,6 +3,8 @@
 8266 broke down after only 6 years. Made micropython-version with ESP32.
 Starts with boot.py
 
+The clent "ulostus3" is now quite special, it codes the message in hexadecimal for maximal transparency.
+
 =========
 
 Server-type Wifi clock, which only shows messages from my desktop machine. 
